@@ -17,5 +17,37 @@
          💬 Discuter sur WhatsApp
       </a>
     </div>
+
+    <hr style="margin: 30px 0;">
+
+    <!-- Formulaire de Contact Netlify -->
+    <div style="max-width: 400px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
+      <h2>Envoyez-nous un message</h2>
+      
+      <form name="contact" method="POST" data-netlify="true">
+        <input type="hidden" name="form-name" value="contact" />
+
+        <p>
+          <label>Votre Nom :<br>
+            <input type="text" name="name" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
+          </label>
+        </p>
+        <p>
+          <label>Votre Téléphone ou Email :<br>
+            <input type="text" name="contact_info" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
+          </label>
+        </p>
+        <p>
+          <label>Votre Message :<br>
+            <textarea name="message" rows="4" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;"></textarea>
+          </label>
+        </p>
+        <p>
+          <button type="submit" style="background-color: #0066cc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+            ✉️ Envoyer le message
+          </button>
+        </p>
+      </form>
+    </div>
 </body>
 </html>
