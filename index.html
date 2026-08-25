@@ -26,7 +26,7 @@
       
       <p>
         <label>Choisissez un article :<br>
-          <select id="article" onchange="calculerTotal()" style="width: 100%; padding: 8px; margin-top: 5px;">
+          <select id="article" style="width: 100%; padding: 8px; margin-top: 5px;">
             <option value="15000">Chaise en bois massif (15 000 FCFA)</option>
             <option value="50000">Table à manger (50 000 FCFA)</option>
             <option value="35000">Armoire de rangement (35 000 FCFA)</option>
@@ -36,13 +36,12 @@
 
       <p>
         <label>Quantité :<br>
-          <input type="number" id="quantite" value="1" min="1" oninput="calculerTotal()" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
+          <input type="number" id="quantite" value="1" min="1" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
         </label>
       </p>
 
       <h3 style="color: #0066cc;">Total estimé : <span id="prix-total">15 000</span> FCFA</h3>
     </div>
-
     <!-- 📜 CODE JAVASCRIPT -->
    <script src="script.js"></script>
 
