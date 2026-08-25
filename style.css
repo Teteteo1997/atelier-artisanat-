@@ -1,120 +1,107 @@
-/* Style général */
+/* ==========================================
+   1. REGLES GENERALES & TYPOGRAPHIE
+   ========================================== */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8fafc;
-    color: #1e293b;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  color: #333333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
 }
 
-/* En-tête bleu */
-header {
-    background-color: #1e3a8a;
-    color: white;
-    text-align: center;
-    padding: 35px 20px;
+/* Conteneur principal pour centrer le site */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 1.6rem;
-    font-weight: bold;
-}
-
-header p {
-    margin-top: 10px;
-    color: #cbd5e1;
-    font-size: 0.95rem;
-}
-
-/* Zone principale */
-main {
-    padding: 20px 15px;
-    max-width: 500px;
-    margin: 0 auto;
+h1 {
+  color: #1a252f;
+  margin-top: 0;
+  font-size: 1.8rem;
 }
 
 h2 {
-    color: #0f172a;
-    font-size: 1.25rem;
-    margin-top: 10px;
-    margin-bottom: 15px;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin-top: 0;
 }
 
-/* Cartes pour les services */
-.card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+hr {
+  border: 0;
+  height: 1px;
+  background: #e0e0e0;
+  margin: 25px 0;
 }
 
-.card-item {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+/* ==========================================
+   2. BOUTONS D'ACTION (TEL & WHATSAPP)
+   ========================================== */
+.btn-whatsapp {
+  background-color: #25D366;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  box-shadow: 0 3px 6px rgba(37, 211, 102, 0.3);
+  transition: transform 0.2s;
 }
 
-.card-item strong {
-    color: #1e3a8a;
-    font-size: 1rem;
-    display: block;
-    margin-bottom: 4px;
+.btn-whatsapp:active {
+  transform: scale(0.98);
 }
 
-.card-item span {
-    color: #64748b;
-    font-size: 0.88rem;
+/* ==========================================
+   3. CARTES ET MODULES (Devis & Formulaire)
+   ========================================== */
+.card {
+  background: #fafafa;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
-/* Bloc de contact orange */
-.contact-box {
-    background-color: #fff7ed;
-    border: 1px solid #fed7aa;
-    border-radius: 10px;
-    padding: 20px 15px;
-    text-align: center;
-    margin-top: 25px;
+.card-highlight {
+  border-left: 4px solid #0066cc;
 }
 
-.contact-box h2 {
-    color: #c2410c;
-    margin-top: 0;
-    margin-bottom: 10px;
+/* Champs de saisie et listes déroulantes */
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 1rem;
 }
 
-.contact-info {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    color: #334155;
+/* Bouton d'envoi */
+.btn-primary {
+  background-color: #0066cc;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100%;
 }
 
-.contact-info a {
-    color: #c2410c;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* Bouton d'action orange */
-.btn-call {
-    display: block;
-    background-color: #f97316;
-    color: white;
-    text-decoration: none;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 0.95rem;
-}
-
-/* Pied de page */
-footer {
-    background-color: #0f172a;
-    color: #94a3b8;
-    text-align: center;
-    padding: 18px 15px;
-    font-size: 0.8rem;
-    margin-top: 30px;
+.prix-affichage {
+  color: #0066cc;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
