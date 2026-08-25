@@ -3,14 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier Artisanat</title>
+
+    <!-- 🎯 1. BALISES SEO DE BASE -->
+    <title>Atelier Artisanat | Menuiserie & Mobilier sur Mesure au Togo</title>
+    <meta name="description" content="Commandez vos meubles en bois massif sur mesure à Lomé, Togo. Chaises, tables, armoires en Teck, Iroko et Acajou. Devis estimatif en ligne instantané.">
+    <meta name="author" content="Atelier Artisanat">
+
+    <!-- 📲 2. BALISES OPEN GRAPH (Aperçu WhatsApp & Réseaux Sociaux) -->
+    <meta property="og:title" content="Atelier Artisanat - Mobilier sur Mesure au Togo" />
+    <meta property="og:description" content="Estimez votre devis en direct et commandez vos meubles de qualité sur WhatsApp." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=800" />
+    <meta property="og:type" content="website" />
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="container">
       <h1>Atelier Artisanat</h1>
-      <p>Bienvenue sur notre site de présentation.</p>
+      <p>Bienvenue sur notre site de présentation. Fabrication de mobilier de qualité sur mesure.</p>
       
       <p>📞 Téléphone : <a href="tel:+22899658573">+228 99 65 85 73</a></p>
       
@@ -22,26 +33,26 @@
 
       <hr>
 
-      <!-- 🖼️ OPTION A : GALERIE NOS REALISATIONS -->
+      <!-- 🖼️ GALERIE NOS REALISATIONS -->
       <h2>Nos Réalisations</h2>
       <div class="galerie-grid">
         <div class="galerie-item">
-          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400" alt="Chaise en bois">
+          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400" alt="Chaise en bois massif sur mesure">
           <p>Chaise Design</p>
         </div>
         <div class="galerie-item">
-          <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=400" alt="Table sur mesure">
+          <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=400" alt="Table à manger en teck">
           <p>Table à Manger</p>
         </div>
         <div class="galerie-item">
-          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=400" alt="Armoire">
+          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=400" alt="Armoire de rangement en acajou">
           <p>Armoire Rangement</p>
         </div>
       </div>
 
       <hr>
 
-      <!-- 🧮 OPTION B : CALCULATEUR DE DEVIS AVANCÉ -->
+      <!-- 🧮 CALCULATEUR DE DEVIS AVEC COMMANDE WHATSAPP -->
       <div class="card card-highlight">
         <h2>Estimez votre Devis en Direct</h2>
         
@@ -68,7 +79,7 @@
         <p>
           <label>Finition / Vernis :
             <select id="finition">
-              <option value="0">Brut / Ponce (0 FCFA)</option>
+              <option value="0">Brut / Poncé (0 FCFA)</option>
               <option value="5000">Vernis Mat (+5 000 FCFA)</option>
               <option value="10000">Vernis Brillant Protecteur (+10 000 FCFA)</option>
             </select>
@@ -82,11 +93,18 @@
         </p>
 
         <h3>Total estimé : <span id="prix-total" class="prix-affichage">15 000</span> FCFA</h3>
+
+        <!-- Bouton WhatsApp dynamique -->
+        <div style="margin-top: 20px;">
+          <a id="btn-whatsapp-devis" href="#" target="_blank" class="btn-whatsapp" style="width: 100%; text-align: center; box-sizing: border-box;">
+            🛒 Commander ce devis sur WhatsApp
+          </a>
+        </div>
       </div>
 
       <hr>
 
-      <!-- Formulaire de Contact Netlify -->
+      <!-- FORMULAIRE DE CONTACT NETLIFY -->
       <div class="card">
         <h2>Envoyez-nous un message</h2>
         
