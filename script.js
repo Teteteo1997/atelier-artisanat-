@@ -60,3 +60,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Calcul initial au chargement
   calculerTotal();
 });
+
+/**
+ * Fonction qui va chercher les données météo en direct via une API externe
+ */
+async function chargerMeteo() {
+  const meteoElement = document.getElementById("meteo-info");
+  
+  try {
+    // 1. On envoie une requête vers l'API gratuite Open-Meteo pour Lomé (Latitude: 6.1375, Longitude: 1.2125)
+    const reponse = await fetch("https://api.open-meteo.com/v1/forecast?latitude=6.1375&longitude=1.2125&current_weather=true");
+    
+    // 2. On transforme la réponse reçue au format JSON (lisible par JS)
+    const donnees = await reponse.json();
+    
+    // 3. On extrait la température en direct
+    const temperature = donnees.current_weather.temperature;
+    
+    // 4. On affiche la donnée en direct dans le HTML !
+    if (meteoElement) {
+      meteoElement.innerText = `🌤️ Lomé : ${temperature} °C en direct`;
+    }
+  } catch (erreur) {
+    // En cas de coupure internet ou d'erreur API
+    if (meteoElement) {
+      meteoElement.innerText = "🌤️ Météo indisponible";
+    }
+    console.error("Erreur API :", erreur);
+  }
+}
+
+// On lance le chargement de la météo dès que la page est prête
+document.addEventListener("DOMContentLoaded", () => {
+  chargerMeteo();
+});
