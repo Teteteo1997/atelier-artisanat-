@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Artisanat</title>
-    <!-- Liaison avec le fichier CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,16 +22,55 @@
 
       <hr>
 
-      <!-- 🧮 MODULE JAVASCRIPT : Calculateur de devis -->
+      <!-- 🖼️ OPTION A : GALERIE NOS REALISATIONS -->
+      <h2>Nos Réalisations</h2>
+      <div class="galerie-grid">
+        <div class="galerie-item">
+          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400" alt="Chaise en bois">
+          <p>Chaise Design</p>
+        </div>
+        <div class="galerie-item">
+          <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=400" alt="Table sur mesure">
+          <p>Table à Manger</p>
+        </div>
+        <div class="galerie-item">
+          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=400" alt="Armoire">
+          <p>Armoire Rangement</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- 🧮 OPTION B : CALCULATEUR DE DEVIS AVANCÉ -->
       <div class="card card-highlight">
         <h2>Estimez votre Devis en Direct</h2>
         
         <p>
-          <label>Choisissez un article :
+          <label>Article :
             <select id="article">
-              <option value="15000">Chaise en bois massif (15 000 FCFA)</option>
+              <option value="15000">Chaise (15 000 FCFA)</option>
               <option value="50000">Table à manger (50 000 FCFA)</option>
               <option value="35000">Armoire de rangement (35 000 FCFA)</option>
+            </select>
+          </label>
+        </p>
+
+        <p>
+          <label>Type de Bois :
+            <select id="bois">
+              <option value="1">Iroko / Standard (Base)</option>
+              <option value="1.3">Teck (+30% sur le bois)</option>
+              <option value="1.5">Acajou (+50% sur le bois)</option>
+            </select>
+          </label>
+        </p>
+
+        <p>
+          <label>Finition / Vernis :
+            <select id="finition">
+              <option value="0">Brut / Ponce (0 FCFA)</option>
+              <option value="5000">Vernis Mat (+5 000 FCFA)</option>
+              <option value="10000">Vernis Brillant Protecteur (+10 000 FCFA)</option>
             </select>
           </label>
         </p>
@@ -79,7 +117,6 @@
       </div>
     </div>
 
-    <!-- Liaison avec le fichier JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
