@@ -4,77 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atelier Artisanat</title>
+    <!-- Liaison avec le fichier CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Atelier Artisanat</h1>
-    <p>Bienvenue sur notre site de présentation.</p>
-    
-    <p>📞 Téléphone : <a href="tel:+22899658573">+228 99 65 85 73</a></p>
-    
-    <div style="margin: 20px 0;">
-      <a href="https://wa.me/22899658573?text=Bonjour,%20je%20souhaite%20un%20renseignement" 
-         style="background-color: #25D366; color: white; padding: 12px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; display: inline-block;">
-         💬 Discuter sur WhatsApp
-      </a>
-    </div>
 
-    <hr style="margin: 30px 0;">
-
-    <!-- 🧮 MODULE JAVASCRIPT : Calculateur de devis -->
-    <div style="max-width: 400px; padding: 15px; border: 2px solid #0066cc; border-radius: 8px; margin-bottom: 30px;">
-      <h2>Estimez votre Devis en Direct</h2>
+    <div class="container">
+      <h1>Atelier Artisanat</h1>
+      <p>Bienvenue sur notre site de présentation.</p>
       
-      <p>
-        <label>Choisissez un article :<br>
-          <select id="article" style="width: 100%; padding: 8px; margin-top: 5px;">
-            <option value="15000">Chaise en bois massif (15 000 FCFA)</option>
-            <option value="50000">Table à manger (50 000 FCFA)</option>
-            <option value="35000">Armoire de rangement (35 000 FCFA)</option>
-          </select>
-        </label>
-      </p>
-
-      <p>
-        <label>Quantité :<br>
-          <input type="number" id="quantite" value="1" min="1" style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
-        </label>
-      </p>
-
-      <h3 style="color: #0066cc;">Total estimé : <span id="prix-total">15 000</span> FCFA</h3>
-    </div>
-    <!-- 📜 CODE JAVASCRIPT -->
-   <script src="script.js"></script>
-
-    <hr style="margin: 30px 0;">
-
-    <!-- Formulaire de Contact Netlify -->
-    <div style="max-width: 400px; padding: 15px; border: 1px solid #ccc; border-radius: 8px;">
-      <h2>Envoyez-nous un message</h2>
+      <p>📞 Téléphone : <a href="tel:+22899658573">+228 99 65 85 73</a></p>
       
-      <form name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact" />
+      <div style="margin: 20px 0;">
+        <a href="https://wa.me/22899658573?text=Bonjour,%20je%20souhaite%20un%20renseignement" class="btn-whatsapp">
+           💬 Discuter sur WhatsApp
+        </a>
+      </div>
+
+      <hr>
+
+      <!-- 🧮 MODULE JAVASCRIPT : Calculateur de devis -->
+      <div class="card card-highlight">
+        <h2>Estimez votre Devis en Direct</h2>
+        
+        <p>
+          <label>Choisissez un article :
+            <select id="article">
+              <option value="15000">Chaise en bois massif (15 000 FCFA)</option>
+              <option value="50000">Table à manger (50 000 FCFA)</option>
+              <option value="35000">Armoire de rangement (35 000 FCFA)</option>
+            </select>
+          </label>
+        </p>
 
         <p>
-          <label>Votre Nom :<br>
-            <input type="text" name="name" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
+          <label>Quantité :
+            <input type="number" id="quantite" value="1" min="1">
           </label>
         </p>
-        <p>
-          <label>Votre Téléphone ou Email :<br>
-            <input type="text" name="contact_info" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;">
-          </label>
-        </p>
-        <p>
-          <label>Votre Message :<br>
-            <textarea name="message" rows="4" required style="width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box;"></textarea>
-          </label>
-        </p>
-        <p>
-          <button type="submit" style="background-color: #0066cc; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-            ✉️ Envoyer le message
-          </button>
-        </p>
-      </form>
+
+        <h3>Total estimé : <span id="prix-total" class="prix-affichage">15 000</span> FCFA</h3>
+      </div>
+
+      <hr>
+
+      <!-- Formulaire de Contact Netlify -->
+      <div class="card">
+        <h2>Envoyez-nous un message</h2>
+        
+        <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <p>
+            <label>Votre Nom :
+              <input type="text" name="name" required>
+            </label>
+          </p>
+          <p>
+            <label>Votre Téléphone ou Email :
+              <input type="text" name="contact_info" required>
+            </label>
+          </p>
+          <p>
+            <label>Votre Message :
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+          </p>
+          <p>
+            <button type="submit" class="btn-primary">
+              ✉️ Envoyer le message
+            </button>
+          </p>
+        </form>
+      </div>
     </div>
+
+    <!-- Liaison avec le fichier JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
