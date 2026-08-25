@@ -1,38 +1,40 @@
 /**
- * Calculateur de devis automatique
- * Atelier Artisanat
+ * Calculateur de devis dynamique avancé
  */
 function calculerTotal() {
-  // 1. Récupération des éléments HTML
   const selectArticle = document.getElementById("article");
+  const selectBois = document.getElementById("bois");
+  const selectFinition = document.getElementById("finition");
   const inputQuantite = document.getElementById("quantite");
   const affichageTotal = document.getElementById("prix-total");
 
-  // 2. Conversion et vérification de la quantité (Sécurité)
+  // Sécurisation de la quantité
   let quantite = parseInt(inputQuantite.value);
-
-  // Si la quantité n'est pas un nombre ou est inférieure à 1, on force à 1
   if (isNaN(quantite) || quantite < 1) {
     quantite = 1;
   }
 
-  // 3. Récupération du prix unitaire
-  const prixUnitaire = parseInt(selectArticle.value);
+  // Récupération des prix
+  const prixBase = parseInt(selectArticle.value);
+  const multiplicateurBois = parseFloat(selectBois.value); // Coefficient selon le bois
+  const prixFinition = parseInt(selectFinition.value);     // Supplément finition
 
-  // 4. Calcul du montant total
+  // Calcul du prix unitaire puis du total
+  const prixUnitaire = (prixBase * multiplicateurBois) + prixFinition;
   const total = prixUnitaire * quantite;
 
-  // 5. Affichage propre avec espaces pour les milliers (ex: 50 000 FCFA)
+  // Affichage formaté
   affichageTotal.innerText = total.toLocaleString("fr-FR");
 }
 
-// Écouteurs d'événements dynamiques : Le calcul s'exécute dès qu'on touche aux champs
+// Écouteurs d'événements
 document.addEventListener("DOMContentLoaded", () => {
-  const selectArticle = document.getElementById("article");
-  const inputQuantite = document.getElementById("quantite");
-
-  if (selectArticle && inputQuantite) {
-    selectArticle.addEventListener("change", calculerTotal);
-    inputQuantite.addEventListener("input", calculerTotal);
-  }
+  const elements = ["article", "bois", "finition", "quantite"];
+  elements.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("change", calculerTotal);
+      el.addEventListener("input", calculerTotal);
+    }
+  });
 });
