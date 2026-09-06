@@ -74,7 +74,6 @@ hr {
   transform: scale(0.98);
 }
 
-/* Style du bouton WhatsApp désactivé tant que tout n'est pas rempli */
 .btn-whatsapp.disabled-btn {
   background-color: #a0aec0 !important;
   box-shadow: none;
