@@ -1,119 +1,147 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Atelier Artisanat</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Atelier Artisanat | Menuiserie & Mobilier sur Mesure au Togo</title>
+    <meta name="description" content="Commandez vos meubles en bois massif sur mesure à Lomé, Togo. Chaises, tables, armoires en Teck, Iroko et Acajou. Devis estimatif en ligne instantané.">
+    
+    <meta property="og:title" content="Atelier Artisanat - Mobilier sur Mesure au Togo" />
+    <meta property="og:description" content="Estimez votre devis en direct et commandez vos meubles de qualité sur WhatsApp." />
+    <meta property="og:image" content="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=800" />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="container">
-    
-    <!-- Bouton Mode Sombre -->
-    <button id="theme-toggle" class="theme-toggle-btn">🌙 Mode Sombre</button>
+    <div class="container">
+      <button id="btn-theme" class="btn-theme">🌙 Mode Sombre</button>
 
-    <!-- Entête & Infos Client -->
-    <h1>Atelier Artisanat</h1>
-    <div id="meteo" style="font-weight: bold; margin-bottom: 10px; color: #0066cc;">
-      🌤️ Chargement de la météo...
-    </div>
-    <p>Bienvenue sur notre site de présentation. Fabrication de mobilier de qualité sur mesure.</p>
-    <p>📞 Téléphone : <a href="tel:+22899658573">+228 99 65 85 73</a></p>
-    
-    <a href="https://wa.me/22899658573?text=Bonjour,%20je%20souhaite%20des%20informations" target="_blank" class="btn-whatsapp">
-      💬 Discuter sur WhatsApp
-    </a>
-
-    <hr>
-
-    <!-- Galerie Nos Réalisations -->
-    <h2>Nos Réalisations</h2>
-    <div class="galerie-grid">
-      <div class="galerie-item">
-        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=400&q=80" alt="Chaise Design">
-        <p>Chaise Design</p>
-      </div>
-      <div class="galerie-item">
-        <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?auto=format&fit=crop&w=400&q=80" alt="Table à Manger">
-        <p>Table à Manger</p>
-      </div>
-      <div class="galerie-item">
-        <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&w=400&q=80" alt="Armoire Rangement">
-        <p>Armoire Rangement</p>
-      </div>
-    </div>
-
-    <hr>
-
-    <!-- Calculateur de Devis -->
-    <div class="card card-highlight">
-      <h2>Estimez votre Devis en Direct</h2>
+      <h1>Atelier Artisanat</h1>
+      <p id="meteo-info" style="font-weight: bold; color: #0066cc;">Chargement de la météo...</p>
+      <p>Bienvenue sur notre site de présentation. Fabrication de mobilier de qualité sur mesure.</p>
       
-      <label for="article">Article :</label>
-      <select id="article">
-        <option value="" disabled selected>-- Choisissez un article --</option>
-        <option value="15000">Chaise (15 000 FCFA)</option>
-        <option value="45000">Table à manger (45 000 FCFA)</option>
-        <option value="75000">Armoire de rangement (75 000 FCFA)</option>
-      </select>
-
-      <label for="bois">Type de Bois :</label>
-      <select id="bois">
-        <option value="" disabled selected>-- Choisissez le bois --</option>
-        <option value="1">Iroko / Standard (Base)</option>
-        <option value="1.3">Teck / Haut de gamme (+30%)</option>
-        <option value="1.5">Acajou / Luxe (+50%)</option>
-      </select>
-
-      <label for="finition">Finition / Vernis :</label>
-      <select id="finition">
-        <option value="" disabled selected>-- Choisissez la finition --</option>
-        <option value="0">Brut / Poncé (0 FCFA)</option>
-        <option value="5000">Vernis Protecteur (+5 000 FCFA)</option>
-        <option value="10000">Vernis Haute Brillance (+10 000 FCFA)</option>
-      </select>
-
-      <label for="quantite">Quantité :</label>
-      <input type="number" id="quantite" placeholder="Ex: 1" min="1" step="1">
-
-      <h3 style="margin-top: 15px;">Total estimé : <span id="prix-total" class="prix-affichage">---</span></h3>
-
-      <!-- Conversion Euro -->
-      <div class="conversion-box">
-        💶 Estimation internationale : <strong id="prix-eur">Veuillez compléter le formulaire</strong>
+      <p>📞 Téléphone : <a href="tel:+22899658573">+228 99 65 85 73</a></p>
+      
+      <div style="margin: 20px 0;">
+        <a href="https://wa.me/22899658573?text=Bonjour,%20je%20souhaite%20un%20renseignement" class="btn-whatsapp">
+           💬 Discuter sur WhatsApp
+        </a>
       </div>
 
-      <br>
-      <a id="btn-devis-whatsapp" href="#" class="btn-whatsapp disabled-btn" style="width: 100%; text-align: center; box-sizing: border-box;">
-        🛒 Commander ce devis sur WhatsApp
-      </a>
+      <hr>
+
+      <!-- 🔎 BARRE DE RECHERCHE EN DIRECT -->
+      <div class="card" style="margin-bottom: 20px;">
+        <label for="recherche" style="font-weight: bold; display: block; margin-bottom: 5px;">
+          🔎 Rechercher un meuble ou un modèle :
+        </label>
+        <input type="text" id="recherche" placeholder="Ex: Chaise, Table, Armoire..." style="margin-top: 0;">
+      </div>
+
+      <!-- 🖼️ GALERIE NOS REALISATIONS -->
+      <h2>Nos Réalisations</h2>
+      <div class="galerie-grid" id="galerie">
+        <div class="galerie-item" data-nom="chaise design bois">
+          <img src="https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=400" alt="Chaise en bois massif sur mesure">
+          <p>Chaise Design</p>
+        </div>
+        <div class="galerie-item" data-nom="table a manger teck">
+          <img src="https://images.unsplash.com/photo-1615066390971-03e4e1c36ddf?w=400" alt="Table à manger en teck">
+          <p>Table à Manger</p>
+        </div>
+        <div class="galerie-item" data-nom="armoire rangement acajou">
+          <img src="https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=400" alt="Armoire de rangement en acajou">
+          <p>Armoire Rangement</p>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- 🧮 CALCULATEUR DE DEVIS -->
+      <div class="card card-highlight">
+        <h2>Estimez votre Devis en Direct</h2>
+        
+        <p>
+          <label>Article :
+            <select id="article">
+              <option value="15000">Chaise (15 000 FCFA)</option>
+              <option value="50000">Table à manger (50 000 FCFA)</option>
+              <option value="35000">Armoire de rangement (35 000 FCFA)</option>
+            </select>
+          </label>
+        </p>
+
+        <p>
+          <label>Type de Bois :
+            <select id="bois">
+              <option value="1">Iroko / Standard (Base)</option>
+              <option value="1.3">Teck (+30% sur le bois)</option>
+              <option value="1.5">Acajou (+50% sur le bois)</option>
+            </select>
+          </label>
+        </p>
+
+        <p>
+          <label>Finition / Vernis :
+            <select id="finition">
+              <option value="0">Brut / Poncé (0 FCFA)</option>
+              <option value="5000">Vernis Mat (+5 000 FCFA)</option>
+              <option value="10000">Vernis Brillant Protecteur (+10 000 FCFA)</option>
+            </select>
+          </label>
+        </p>
+
+        <p>
+          <label>Quantité :
+            <input type="number" id="quantite" value="1" min="1">
+          </label>
+        </p>
+
+        <h3>Total estimé : <span id="prix-total" class="prix-affichage">15 000</span> FCFA</h3>
+
+        <div style="margin-top: 20px;">
+          <a id="btn-whatsapp-devis" href="#" target="_blank" class="btn-whatsapp" style="width: 100%; text-align: center; box-sizing: border-box;">
+            🛒 Commander ce devis sur WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- FORMULAIRE DE CONTACT NETLIFY -->
+      <div class="card">
+        <h2>Envoyez-nous un message</h2>
+        
+        <form name="contact" method="POST" data-netlify="true">
+          <input type="hidden" name="form-name" value="contact" />
+
+          <p>
+            <label>Votre Nom :
+              <input type="text" name="name" required>
+            </label>
+          </p>
+          <p>
+            <label>Votre Téléphone ou Email :
+              <input type="text" name="contact_info" required>
+            </label>
+          </p>
+          <p>
+            <label>Votre Message :
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+          </p>
+          <p>
+            <button type="submit" class="btn-primary">
+              ✉️ Envoyer le message
+            </button>
+          </p>
+        </form>
+      </div>
     </div>
 
-    <hr>
-
-    <!-- Formulaire de Contact Netlify -->
-    <div class="card">
-      <h2>Envoyez-nous un message</h2>
-      <form name="contact" method="POST" data-netlify="true">
-        <input type="hidden" name="form-name" value="contact">
-
-        <label for="nom">Votre Nom :</label>
-        <input type="text" id="nom" name="nom" required placeholder="Ex: Jean Dupont">
-
-        <label for="contact-client">Votre Téléphone ou Email :</label>
-        <input type="text" id="contact-client" name="contact-client" required placeholder="Ex: +228 90 00 00 00">
-
-        <label for="message">Votre Message :</label>
-        <textarea id="message" name="message" rows="4" required placeholder="Précisez votre besoin..."></textarea>
-
-        <br><br>
-        <button type="submit" class="btn-primary">✉️ Envoyer le message</button>
-      </form>
-    </div>
-
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
