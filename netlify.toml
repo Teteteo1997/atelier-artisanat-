@@ -1,2 +1,3 @@
-[build]
+# Annule le build uniquement sur la branche main
+[context.production]
   ignore = "exit 0"
