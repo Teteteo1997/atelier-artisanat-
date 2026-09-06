@@ -11,10 +11,9 @@ function calculerTotal() {
 
   if (!selectArticle || !inputQuantite) return;
 
-  let quantite = parseInt(inputQuantite.value);
-  if (isNaN(quantite) || quantite < 1) {
-    quantite = 1;
-  }
+  // Récupération souple de la quantité (0 si le champ est vide pendant la saisie)
+  let quantiteSaisie = parseInt(inputQuantite.value);
+  let quantite = isNaN(quantiteSaisie) || quantiteSaisie < 1 ? 0 : quantiteSaisie;
 
   const prixBase = parseInt(selectArticle.value);
   const nomArticle = selectArticle.options[selectArticle.selectedIndex].text.split('(')[0].trim();
@@ -32,7 +31,7 @@ function calculerTotal() {
   affichageTotal.innerText = totalFormate;
 
   const numeroPhone = "22899658573";
-  const messageText = `Bonjour, je souhaite commander :\n- Article : ${nomArticle}\n- Bois : ${nomBois}\n- Finition : ${nomFinition}\n- Quantité : ${quantite}\nTotal estimé : ${totalFormate} FCFA`;
+  const messageText = `Bonjour, je souhaite commander :\n- Article : ${nomArticle}\n- Bois : ${nomBois}\n- Finition : ${nomFinition}\n- Quantité : ${quantite || 1}\nTotal estimé : ${totalFormate} FCFA`;
   const messageEncode = encodeURIComponent(messageText);
 
   if (btnWhatsappDevis) {
@@ -119,6 +118,17 @@ document.addEventListener("DOMContentLoaded", () => {
       el.addEventListener("input", calculerTotal);
     }
   });
+
+  // Remet proprement à 1 si le champ est laissé vide au clic extérieur
+  const inputQuantite = document.getElementById("quantite");
+  if (inputQuantite) {
+    inputQuantite.addEventListener("blur", () => {
+      if (!inputQuantite.value || parseInt(inputQuantite.value) < 1) {
+        inputQuantite.value = 1;
+        calculerTotal();
+      }
+    });
+  }
 
   calculerTotal();
   chargerMeteo();
