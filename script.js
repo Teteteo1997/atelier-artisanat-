@@ -14,13 +14,38 @@ function calculerDevis() {
   const prixBase = parseFloat(selectArticle.value);
   const facteurBois = parseFloat(selectBois.value);
   const prixFinition = parseFloat(selectFinition.value);
-  const quantite = parseInt(inputQuantite.value) || 1;
+  let quantite = parseInt(inputQuantite.value);
 
-  // Formule de calcul du total
-  const totalFCFA = (prixBase * facteurBois + prixFinition) * quantite;
+  // 1. SÉCURITÉ : Corriger toute quantité négative ou égale à zéro
+  if (isNaN(quantite) || quantite < 1) {
+    if (inputQuantite.value !== "") {
+      inputQuantite.value = 1;
+      quantite = 1;
+    }
+  }
+
+  // 2. VÉRIFICATION : L'utilisateur a-t-il sélectionné toutes les options ?
+  const toutEstSelectionne = !isNaN(prixBase) && !isNaN(facteurBois) && !isNaN(prixFinition) && !isNaN(quantite) && quantite >= 1;
+
+  if (!toutEstSelectionne) {
+    // État d'attente professionnel
+    affichagePrixTotal.textContent = "---";
+    affichagePrixEur.textContent = "Veuillez choisir toutes les options";
+    btnDevisWhatsapp.classList.add('disabled-btn');
+    btnDevisWhatsapp.href = "#";
+    return;
+  }
+
+  // SÉCURITÉ SUPPLÉMENTAIRE : Vérification contre les prix négatifs
+  const prixBaseSecurise = Math.max(0, prixBase);
+  const facteurBoisSecurise = Math.max(0, facteurBois);
+  const prixFinitionSecurise = Math.max(0, prixFinition);
+
+  // 3. CALCUL DU TOTAL
+  const totalFCFA = (prixBaseSecurise * facteurBoisSecurise + prixFinitionSecurise) * quantite;
 
   // Affichage formaté en FCFA
-  affichagePrixTotal.textContent = totalFCFA.toLocaleString('fr-FR');
+  affichagePrixTotal.textContent = totalFCFA.toLocaleString('fr-FR') + " FCFA";
 
   // Conversion approximative en Euros (1 EUR ≈ 655.957 FCFA)
   const totalEUR = (totalFCFA / 655.957).toFixed(2);
@@ -31,7 +56,10 @@ function calculerDevis() {
   const nomBois = selectBois.options[selectBois.selectedIndex].text;
   const nomFinition = selectFinition.options[selectFinition.selectedIndex].text;
 
-  // Génération du lien WhatsApp pré-rempli
+  // Réactivation du bouton WhatsApp
+  btnDevisWhatsapp.classList.remove('disabled-btn');
+
+  // Génération du message WhatsApp
   const messageWhatsApp = `Bonjour, je souhaite commander ce devis :\n` +
     `- Article : ${nomArticle}\n` +
     `- Bois : ${nomBois}\n` +
@@ -42,13 +70,13 @@ function calculerDevis() {
   btnDevisWhatsapp.href = `https://wa.me/22899658573?text=${encodeURIComponent(messageWhatsApp)}`;
 }
 
-// Écouteurs d'événements pour mise à jour automatique
+// Écouteurs d'événements pour mise à jour en temps réel
 selectArticle.addEventListener('change', calculerDevis);
 selectBois.addEventListener('change', calculerDevis);
 selectFinition.addEventListener('change', calculerDevis);
 inputQuantite.addEventListener('input', calculerDevis);
 
-// Lancement au chargement initial
+// Verification initiale au chargement
 calculerDevis();
 
 // ==========================================
