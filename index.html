@@ -140,6 +140,31 @@
           </p>
         </form>
       </div>
+
+      <hr>
+
+      <!-- 👑 ESPACE ADMINISTRATION (SIMULATION BACK-END) -->
+      <div class="card card-highlight">
+        <h2>Espace Artisan (Ajouter un meuble)</h2>
+        <p><em>Formulaire réservé à l'artisan pour mettre à jour le catalogue.</em></p>
+        
+        <form id="form-admin">
+          <p>
+            <label>Nom du meuble :
+              <input type="text" id="admin-nom" placeholder="Ex: Lit King Size" required>
+            </label>
+          </p>
+          <p>
+            <label>Prix de base (FCFA) :
+              <input type="number" id="admin-prix" placeholder="Ex: 120000" required>
+            </label>
+          </p>
+          <button type="submit" class="btn-primary" style="background-color: #2e7d32;">
+            ➕ Envoyer au Serveur (POST)
+          </button>
+        </form>
+      </div>
+
     </div>
 
     <script src="script.js"></script>
