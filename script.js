@@ -108,6 +108,75 @@ function initialiserRecherche() {
   }
 }
 
+/**
+ * =======================================================
+ * 5. SIMULATION D'UN SERVEUR BACK-END (NODE.JS / EXPRESS)
+ * =======================================================
+ */
+
+// Base de Données simulée sur le serveur
+let baseDeDonneesMeubles = [
+  { id: 1, nom: "Chaise Design", prix: 15000 },
+  { id: 2, nom: "Table à Manger", prix: 50000 },
+  { id: 3, nom: "Armoire Rangement", prix: 35000 }
+];
+
+/**
+ * Route GET /api/meubles (Lecture)
+ */
+function routeGetMeubles() {
+  return baseDeDonneesMeubles;
+}
+
+/**
+ * Route POST /api/meubles (Création)
+ */
+function routePostMeuble(nouveauMeuble) {
+  const meubleAEnregistrer = {
+    id: baseDeDonneesMeubles.length + 1,
+    nom: nouveauMeuble.nom,
+    prix: parseInt(nouveauMeuble.prix)
+  };
+
+  baseDeDonneesMeubles.push(meubleAEnregistrer);
+
+  return { statut: 201, message: "Meuble ajouté dans la base !", data: meubleAEnregistrer };
+}
+
+/**
+ * CÔTÉ CLIENT (FRONT-END) : Formulaire d'Administration
+ */
+function initialiserEspaceAdmin() {
+  const formAdmin = document.getElementById("form-admin");
+  const selectArticle = document.getElementById("article");
+
+  if (formAdmin) {
+    formAdmin.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const nom = document.getElementById("admin-nom").value;
+      const prix = document.getElementById("admin-prix").value;
+
+      // Simulation de la requête POST au serveur
+      const reponseServeur = routePostMeuble({ nom: nom, prix: prix });
+
+      if (reponseServeur.statut === 201) {
+        alert(`Succès (Serveur) : ${reponseServeur.message}`);
+
+        const meubleCree = reponseServeur.data;
+        
+        // Ajout dynamique du nouvel article au menu déroulant du devis
+        const nouvelleOption = document.createElement("option");
+        nouvelleOption.value = meubleCree.prix;
+        nouvelleOption.text = `${meubleCree.nom} (${meubleCree.prix.toLocaleString("fr-FR")} FCFA)`;
+        selectArticle.add(nouvelleOption);
+
+        formAdmin.reset();
+      }
+    });
+  }
+}
+
 // INITIALISATION DU SITE
 document.addEventListener("DOMContentLoaded", () => {
   const elements = ["article", "bois", "finition", "quantite"];
@@ -119,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Remet proprement à 1 si le champ est laissé vide au clic extérieur
   const inputQuantite = document.getElementById("quantite");
   if (inputQuantite) {
     inputQuantite.addEventListener("blur", () => {
@@ -134,4 +202,5 @@ document.addEventListener("DOMContentLoaded", () => {
   chargerMeteo();
   initialiserTheme();
   initialiserRecherche();
+  initialiserEspaceAdmin();
 });
