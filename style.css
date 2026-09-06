@@ -1,26 +1,26 @@
 /* ==========================================
-   1. REGLES GENERALES & VARIABLES
+   1. REGLES GENERALES & TYPOGRAPHIE
    ========================================== */
 :root {
-  --bg-body: #f4f6f9;
-  --bg-card: #ffffff;
-  --text-main: #333333;
-  --text-heading: #1a252f;
+  --bg-color: #f4f6f9;
+  --container-bg: #ffffff;
+  --text-color: #333333;
+  --card-bg: #fafafa;
   --border-color: #e2e8f0;
 }
 
-body.dark-theme {
-  --bg-body: #121212;
-  --bg-card: #1e1e1e;
-  --text-main: #e0e0e0;
-  --text-heading: #ffffff;
-  --border-color: #333333;
+body.dark-mode {
+  --bg-color: #121212;
+  --container-bg: #1e1e1e;
+  --text-color: #e0e0e0;
+  --card-bg: #2a2a2a;
+  --border-color: #3d3d3d;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: var(--bg-body);
-  color: var(--text-main);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   line-height: 1.6;
   margin: 0;
   padding: 20px;
@@ -28,25 +28,20 @@ body {
 }
 
 .container {
-  max-width: 650px;
+  max-width: 600px;
   margin: 0 auto;
-  background: var(--bg-card);
+  background: var(--container-bg);
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
-  color: var(--text-heading);
-  margin-top: 0;
-  font-size: 1.8rem;
+h1, h2, h3 {
+  color: var(--text-color);
 }
 
-h2 {
-  color: var(--text-heading);
-  font-size: 1.3rem;
-  margin-top: 0;
-}
+h1 { font-size: 1.8rem; margin-top: 0; }
+h2 { font-size: 1.3rem; margin-top: 0; }
 
 hr {
   border: 0;
@@ -56,69 +51,51 @@ hr {
 }
 
 /* ==========================================
-   2. BOUTONS & INTERACTION
+   2. BOUTONS & THEME
    ========================================== */
 .btn-whatsapp {
   background-color: #25D366;
-  color: white !important;
+  color: white;
   padding: 12px 20px;
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
   display: inline-block;
   box-shadow: 0 3px 6px rgba(37, 211, 102, 0.3);
-  transition: transform 0.2s, background-color 0.3s;
+  transition: transform 0.2s;
 }
 
-.btn-whatsapp:active {
-  transform: scale(0.98);
-}
+.btn-whatsapp:active { transform: scale(0.98); }
 
-.btn-whatsapp.disabled-btn {
-  background-color: #a0aec0 !important;
-  box-shadow: none;
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.theme-toggle-btn {
+.btn-theme {
   background: transparent;
   border: 1px solid var(--border-color);
-  color: var(--text-main);
+  color: var(--text-color);
   padding: 8px 12px;
   border-radius: 20px;
   cursor: pointer;
-  float: right;
   font-size: 0.9rem;
+  float: right;
 }
 
 /* ==========================================
    3. CARTES ET FORMULAIRES
    ========================================== */
 .card {
-  background: var(--bg-card);
+  background: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
 }
 
-.card-highlight {
-  border-left: 4px solid #0066cc;
-}
+.card-highlight { border-left: 4px solid #0066cc; }
 
-input[type="text"],
-input[type="number"],
-select,
-textarea {
+input[type="text"], input[type="number"], select, textarea {
   width: 100%;
   padding: 10px;
   margin-top: 6px;
-  margin-bottom: 12px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-card);
-  color: var(--text-main);
+  border: 1px solid #cccccc;
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 1rem;
@@ -142,17 +119,8 @@ textarea {
   font-weight: bold;
 }
 
-.conversion-box {
-  margin-top: 10px;
-  padding: 10px;
-  background: rgba(0, 102, 204, 0.08);
-  border-radius: 6px;
-  font-size: 0.95rem;
-  color: var(--text-main);
-}
-
 /* ==========================================
-   4. GALERIE NOS REALISATIONS
+   4. GALERIE D'IMAGES & RECHERCHE
    ========================================== */
 .galerie-grid {
   display: grid;
@@ -164,8 +132,8 @@ textarea {
 .galerie-item {
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--border-color);
-  background: var(--bg-card);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: var(--card-bg);
   text-align: center;
 }
 
@@ -180,5 +148,9 @@ textarea {
   font-size: 0.85rem;
   font-weight: bold;
   margin: 8px 0;
-  color: var(--text-heading);
+  color: var(--text-color);
+}
+
+.galerie-item.masque {
+  display: none !important;
 }
