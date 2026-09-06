@@ -1,127 +1,111 @@
-/**
- * Application Atelier Artisanat
- * - Calculateur & Commande WhatsApp
- * - API Open-Meteo & API ExchangeRate
- * - Mode Sombre avec localStorage
- */
+// ==========================================
+// 1. CALCULATEUR DE DEVIS & WHATSAPP
+// ==========================================
+const selectArticle = document.getElementById('article');
+const selectBois = document.getElementById('bois');
+const selectFinition = document.getElementById('finition');
+const inputQuantite = document.getElementById('quantite');
 
-// Globales pour la conversion
-let tauxEUR = 0.00152; // Taux par défaut (1 FCFA ≈ 0.00152 EUR)
+const affichagePrixTotal = document.getElementById('prix-total');
+const affichagePrixEur = document.getElementById('prix-eur');
+const btnDevisWhatsapp = document.getElementById('btn-devis-whatsapp');
 
-// 1. CALCULATEUR DE DEVIS & CONVERSION DE DEVISES
-function calculerTotal() {
-  const selectArticle = document.getElementById("article");
-  const selectBois = document.getElementById("bois");
-  const selectFinition = document.getElementById("finition");
-  const inputQuantite = document.getElementById("quantite");
-  const affichageTotal = document.getElementById("prix-total");
-  const affichageEUR = document.getElementById("prix-eur");
-  const btnWhatsappDevis = document.getElementById("btn-whatsapp-devis");
-
-  if (!selectArticle || !inputQuantite) return;
-
-  // Sécurisation quantité
+function calculerDevis() {
+  const prixBase = parseFloat(selectArticle.value);
+  const facteurBois = parseFloat(selectBois.value);
+  const prixFinition = parseFloat(selectFinition.value);
   let quantite = parseInt(inputQuantite.value);
-  if (isNaN(quantite) || quantite < 1) quantite = 1;
 
-  // Extraction des prix et noms
-  const prixBase = parseInt(selectArticle.value);
-  const nomArticle = selectArticle.options[selectArticle.selectedIndex].text.split('(')[0].trim();
-
-  const multiplicateurBois = parseFloat(selectBois.value);
-  const nomBois = selectBois.options[selectBois.selectedIndex].text.split('(')[0].trim();
-
-  const prixFinition = parseInt(selectFinition.value);
-  const nomFinition = selectFinition.options[selectFinition.selectedIndex].text.split('(')[0].trim();
-
-  // Calcul du total en FCFA
-  const prixUnitaire = (prixBase * multiplicateurBois) + prixFinition;
-  const totalFCFA = prixUnitaire * quantite;
-  const totalFormate = totalFCFA.toLocaleString("fr-FR");
-
-  // Affichage FCFA
-  affichageTotal.innerText = totalFormate;
-
-  // Conversion dynamique en EUR si l'API a répondu
-  if (affichageEUR && tauxEUR > 0) {
-    const totalEUR = (totalFCFA * tauxEUR).toFixed(2);
-    affichageEUR.innerText = `(~ ${totalEUR} €)`;
-  }
-
-  // Génération du lien WhatsApp
-  const numeroPhone = "22899658573";
-  const messageText = `Bonjour, je souhaite commander :\n- Article : ${nomArticle}\n- Bois : ${nomBois}\n- Finition : ${nomFinition}\n- Quantité : ${quantite}\nTotal estimé : ${totalFormate} FCFA`;
-  
-  if (btnWhatsappDevis) {
-    btnWhatsappDevis.href = `https://wa.me/${numeroPhone}?text=${encodeURIComponent(messageText)}`;
-  }
-}
-
-// 2. API : CHARGEMENT DU TAUX DE CHANGE (FCFA -> EUR)
-async function chargerTauxChange() {
-  try {
-    const reponse = await fetch("https://open.er-api.com/v6/latest/XOF");
-    const donnees = await reponse.json();
-    if (donnees && donnees.rates && donnees.rates.EUR) {
-      tauxEUR = donnees.rates.EUR;
-      calculerTotal(); // Recalcule avec le taux à jour
+  // 1. SÉCURITÉ : Corriger toute quantité négative ou égale à zéro
+  if (isNaN(quantite) || quantite < 1) {
+    if (inputQuantite.value !== "") {
+      inputQuantite.value = 1;
+      quantite = 1;
     }
-  } catch (erreur) {
-    console.warn("API Change indisponible, utilisation du taux par défaut.");
   }
+
+  // 2. VÉRIFICATION : L'utilisateur a-t-il sélectionné toutes les options ?
+  const toutEstSelectionne = !isNaN(prixBase) && !isNaN(facteurBois) && !isNaN(prixFinition) && !isNaN(quantite) && quantite >= 1;
+
+  if (!toutEstSelectionne) {
+    // État d'attente professionnel
+    affichagePrixTotal.textContent = "---";
+    affichagePrixEur.textContent = "Veuillez choisir toutes les options";
+    btnDevisWhatsapp.classList.add('disabled-btn');
+    btnDevisWhatsapp.href = "#";
+    return;
+  }
+
+  // SÉCURITÉ SUPPLÉMENTAIRE : Vérification contre les prix négatifs
+  const prixBaseSecurise = Math.max(0, prixBase);
+  const facteurBoisSecurise = Math.max(0, facteurBois);
+  const prixFinitionSecurise = Math.max(0, prixFinition);
+
+  // 3. CALCUL DU TOTAL
+  const totalFCFA = (prixBaseSecurise * facteurBoisSecurise + prixFinitionSecurise) * quantite;
+
+  // Affichage formaté en FCFA
+  affichagePrixTotal.textContent = totalFCFA.toLocaleString('fr-FR') + " FCFA";
+
+  // Conversion approximative en Euros (1 EUR ≈ 655.957 FCFA)
+  const totalEUR = (totalFCFA / 655.957).toFixed(2);
+  affichagePrixEur.textContent = totalEUR + " €";
+
+  // Récupération des noms d'options sélectionnées
+  const nomArticle = selectArticle.options[selectArticle.selectedIndex].text;
+  const nomBois = selectBois.options[selectBois.selectedIndex].text;
+  const nomFinition = selectFinition.options[selectFinition.selectedIndex].text;
+
+  // Réactivation du bouton WhatsApp
+  btnDevisWhatsapp.classList.remove('disabled-btn');
+
+  // Génération du message WhatsApp
+  const messageWhatsApp = `Bonjour, je souhaite commander ce devis :\n` +
+    `- Article : ${nomArticle}\n` +
+    `- Bois : ${nomBois}\n` +
+    `- Finition : ${nomFinition}\n` +
+    `- Quantité : ${quantite}\n` +
+    `- Total Estimé : ${totalFCFA.toLocaleString('fr-FR')} FCFA (~${totalEUR} €)`;
+
+  btnDevisWhatsapp.href = `https://wa.me/22899658573?text=${encodeURIComponent(messageWhatsApp)}`;
 }
 
-// 3. API : CHARGEMENT DE LA MÉTÉO (Lomé)
+// Écouteurs d'événements pour mise à jour en temps réel
+selectArticle.addEventListener('change', calculerDevis);
+selectBois.addEventListener('change', calculerDevis);
+selectFinition.addEventListener('change', calculerDevis);
+inputQuantite.addEventListener('input', calculerDevis);
+
+// Verification initiale au chargement
+calculerDevis();
+
+// ==========================================
+// 2. METEO EN DIRECT (API Open-Meteo)
+// ==========================================
 async function chargerMeteo() {
-  const meteoElement = document.getElementById("meteo-info");
+  const divMeteo = document.getElementById('meteo');
   try {
-    const reponse = await fetch("https://api.open-meteo.com/v1/forecast?latitude=6.1375&longitude=1.2125&current_weather=true");
+    const reponse = await fetch('https://api.open-meteo.com/v1/forecast?latitude=6.1375&longitude=1.2125&current_weather=true');
     const donnees = await reponse.json();
     const temp = donnees.current_weather.temperature;
-    if (meteoElement) meteoElement.innerText = `🌤️ Lomé : ${temp} °C en direct`;
+    divMeteo.textContent = `🌤️ Lomé : ${temp} °C en direct`;
   } catch (erreur) {
-    if (meteoElement) meteoElement.innerText = "🌤️ Météo indisponible";
+    divMeteo.textContent = '🌤️ Lomé : Météo indisponible';
   }
 }
+chargerMeteo();
 
-// 4. GESTION DU MODE SOMBRE & LOCALSTORAGE
-function initialiserTheme() {
-  const btnTheme = document.getElementById("theme-toggle");
-  const themeSauvegarde = localStorage.getItem("theme");
+// ==========================================
+// 3. BOUTON MODE SOMBRE (DARK MODE)
+// ==========================================
+const btnTheme = document.getElementById('theme-toggle');
 
-  // Applique le thème sauvegardé
-  if (themeSauvegarde === "dark") {
-    document.body.classList.add("dark-theme");
-    if (btnTheme) btnTheme.innerText = "☀️ Mode Clair";
+btnTheme.addEventListener('click', () => {
+  document.body.classList.toggle('dark-theme');
+
+  if (document.body.classList.contains('dark-theme')) {
+    btnTheme.textContent = '☀️ Mode Clair';
+  } else {
+    btnTheme.textContent = '🌙 Mode Sombre';
   }
-
-  // Écouteur sur le bouton
-  if (btnTheme) {
-    btnTheme.addEventListener("click", () => {
-      document.body.classList.toggle("dark-theme");
-      const estSombre = document.body.classList.contains("dark-theme");
-
-      // Mise à jour du texte et du localStorage
-      btnTheme.innerText = estSombre ? "☀️ Mode Clair" : "🌙 Mode Sombre";
-      localStorage.setItem("theme", estSombre ? "dark" : "light");
-    });
-  }
-}
-
-// INITIALISATION GLOBALE
-document.addEventListener("DOMContentLoaded", () => {
-  initialiserTheme();
-  chargerMeteo();
-  chargerTauxChange();
-
-  const elements = ["article", "bois", "finition", "quantite"];
-  elements.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("change", calculerTotal);
-      el.addEventListener("input", calculerTotal);
-    }
-  });
-
-  calculerTotal();
 });
